@@ -14,16 +14,16 @@ shopt -s nullglob
 for file in /home/sigafoo/PutMapsHereForFastDL/* /home/newbie/PutMapsHereForFastDL/* ;
 do
     # is thefile in use?
-    fuser $file;
+    fuser $file &> /dev/null ;
     if [ $? != 0 ]
     # file is not in use
     then
         # does file have the bsp suffix?
-        if [[ $file == *".bsp" ]];
+        if [[ $file == *".bsp" ]]
         # file does have the bsp suffix
         then
             # does file have the bsp header?
-            hexdump -n 8 $file | grep "4256 5053 0014 0000" &> /dev/null
+            hexdump -n 8 $file | grep "4256 5053 0014 0000" &> /dev/null ;
             if [ $? == 0 ]
             # file is almost certainly a real bsp file
             then
